@@ -3,6 +3,8 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import Colors from "../util/colors";
 import Title from "../components/ui/Title";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -38,8 +40,8 @@ export default function StartGameScreen({ onPickNumber }) {
   return (
     <View style={styles.rootContainer}>
       <Title>Make yo GUESS!!!</Title>
-
-      <View style={styles.inputContainer}>
+      <Card>
+        <InstructionText>Enter your number</InstructionText>
         <TextInput
           style={styles.valueInput}
           maxLength={2}
@@ -55,7 +57,7 @@ export default function StartGameScreen({ onPickNumber }) {
             <PrimaryButton onPress={handleConfirmInput}>Confirm</PrimaryButton>
           </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 }
@@ -65,20 +67,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 100,
     alignItems: "center",
-  },
-  inputContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 36,
-    borderRadius: 8,
-    marginHorizontal: 24,
-    padding: 16,
-    backgroundColor: Colors.mojito,
-    elevation: 8,
-    shadowColor: "black",
-    shadowOffset: { width: 4, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.25,
   },
   valueInput: {
     height: 50,
