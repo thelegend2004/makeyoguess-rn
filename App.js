@@ -8,6 +8,7 @@ import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "./util/colors";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
@@ -49,22 +50,32 @@ export default function App() {
   if (userNumber)
     screen = <GameScreen userNumber={userNumber} onGameOver={handleGameOver} />;
 
-  if (isGameOver && userNumber) screen = <GameOverScreen userNumber={userNumber} roundsNumber={guessRounds} onStartNewGame={handleStartNewGame}/>;
+  if (isGameOver && userNumber)
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={guessRounds}
+        onStartNewGame={handleStartNewGame}
+      />
+    );
 
   return (
-    <LinearGradient
-      colors={[Colors.shade1, Colors.shade2]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        source={require("./assets/images/tequila.png")}
-        resizeMode="cover"
+    <>
+      <StatusBar style="light" />
+      <LinearGradient
+        colors={[Colors.shade1, Colors.shade2]}
         style={styles.rootScreen}
-        imageStyle={styles.screenImage}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require("./assets/images/tequila.png")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.screenImage}
+        >
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
